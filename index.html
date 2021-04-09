@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calorie Tracker</title>
+</head>
+<body>
+    <header>
+        <nav> 
+            <div class="container">
+                <div class="container-left">
+                    <span id="home-link" class="nav-link">HOME</span>
+                    <!-- </span>this name to be changed 'Calorie Tracker' -->
+                </div>
+                <div class="container-right">
+                    <span id="signup-link" class="nav-link">signup</span>
+                    <span id="login-link" class="nav-link">login</span>
+                    <span id="logout-link hideen" class="nav-link">logout</span>
+                    <span id="mymeal-link hideen" class="nav-link">mymeal</span>
+                    <span id="profile-link hidden" class="nav-link">profile</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="signup-board hidden"> <!-- should be hidden -->
+        <form id="signup-form">
+            <div class="signup-input">
+             <input type="text" placeholder="First name" id="signup-first-name">
+             <input type="text" placeholder="Last name" id="signup-last-name">
+             <input type="email" placeholder="Email Address" id="signup-email">
+             <input type="password" placeholder="Password" id="signup-password">
+             <input type="text" placeholder="Height" id="signup-height">   
+             <input type="text" placeholder="Weight" id="signup-weight">    
+             <span id="signup-sex">
+                <label for="signup-sex">SEX</label> <label for="signup-sex">Male</label><input type="checkbox" id="signup-male"> <label for="signup-sex">Female</label><input type="checkbox" id="signup-female">
+            </span>       
+            </div>
+          <div class="signup-submit">
+            <input type="submit" value="Sign-up">
+          </div>  
+        </form>
+    </section>
+
+    <section class="login-board"> <!-- should be hidden -->
+        <form id="login-form">
+            <div class="login-input">
+             <input type="text" placeholder="Email Address" id="login-email">
+             <input type="text" placeholder="Password" id="login-password">     
+            </div>
+
+            <div class="login-submit">
+              <div class="login-button"> 
+                  <input type="submit" value="Login">
+              </div>
+              <div class="signup-button">
+                 <label for="login-password">Not a member yet?</label>
+                 <input type="submit" value="Sign-up">
+              </div>  
+            </div>  
+        </form>
+    </section>
+
+    <section class="dashboard"> <!-- should be hidden -->
+        <div class="search-bar-container"></div>
+        <div class="search-result-container"></div>
+        <div class="save-container"></div>
+    </section>
+    
+
+
+
+
+
+
+
+
+
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script async defer src="/main.js"></script>
+</body>
+</html>

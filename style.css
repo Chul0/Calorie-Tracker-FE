@@ -1,0 +1,59 @@
+/* * {
+    border: 1px solid black;
+} */
+
+.container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 10px 0;
+}
+
+.signup-input{
+   width: 400px;
+   display:flex;
+   flex-direction: column;
+   margin: auto;
+}
+
+.signup-board{
+    border: 1px solid black;
+    width: 450px;
+    margin: 30px auto 30px auto;
+}
+
+.signup-submit{
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.login-board {
+    border: 1px solid black;
+    width: 450px;
+    margin: auto;
+}
+
+
+.login-input{
+    display:flex;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+}
+
+.login-submit {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.dashboard {
+    border: 1px solid black;
+    width: 80%;
+    height: 600px;
+    margin: 30px auto 30px auto;
+}
+
