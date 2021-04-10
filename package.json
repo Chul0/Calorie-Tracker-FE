@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "rowdy-logger": "^1.0.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "name": "Calorie-Tracker-FE",
+  "description": "Solo Project 2(Frontend)",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chul0/Calorie-Tracker-FE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chul0/Calorie-Tracker-FE/issues"
+  },
+  "homepage": "https://github.com/Chul0/Calorie-Tracker-FE#readme"
+}
