@@ -1,3 +1,4 @@
+
 const showSection = (sectionClass) => {
     document.querySelectorAll('section').forEach( s => s.classList.add('hidden'))
     document.querySelector(sectionClass).classList.remove('hidden')
@@ -117,3 +118,47 @@ document.querySelector('#logout-link').addEventListener('click', () =>{
     localStorage.removeItem('userId')
     location.reload();
 })
+
+//Search food functionality 
+let searchForm = document.querySelector('#food-form')
+searchForm.addEventListener('submit', async(event) => {
+    event.preventDefault()
+    try {
+        const searchBar = document.querySelector('#food-search').value
+        // console.log(searchBar)
+
+        const response = await axios.get(`http://localhost:3001/food/search/${searchBar}`)
+        // console.log(response.data.parsed[0]) //food name
+        // console.log(response.data.parsed[0].food.label) //food name
+        // console.log(response.data.parsed[0].food.nutrients.ENERC_KCAL) //Kcal
+        // console.log(response.data.parsed[0].food.nutrients.FAT) //fat
+        // console.log(response.data.parsed[0].food.nutrients.PROCNT) //protein
+        // console.log(response.data.parsed[0].food.nutrients.CHOCDF) //carbs
+        showResults(response.data)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// resultsId = null
+const showResults = (data) => {
+    // resultsId = data.parsed[0].food.foodId
+    let searchResults = document.querySelector('.search-result-container')
+    searchResults.classList.remove('hidden')
+    
+    let resultFoodName = document.querySelector('#result-food-name')
+    resultFoodName.innerText = data.parsed[0].food.label
+    
+    let resultKcal = document.querySelector('#result-kcal')
+    resultKcal.innerText = `Calories: ${data.parsed[0].food.nutrients.ENERC_KCAL}`
+
+    let resultCarbs = document.querySelector('#result-carbs')
+    resultCarbs.innerText = `Total Carbohydrate: ${data.parsed[0].food.nutrients.CHOCDF}g`
+
+    let resultFat = document.querySelector('#result-fat')
+    resultFat.innerText = `Total Fat: ${data.parsed[0].food.nutrients.FAT}g`
+
+    let resultProtein = document.querySelector('#result-protein')
+    resultProtein.innerText = `Protein: ${data.parsed[0].food.nutrients.PROCNT}g`
+    
+}
