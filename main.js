@@ -97,7 +97,7 @@ try {
         email: email,
         password: password
     })
-    console.log(response)
+    // console.log(response)
 
     const userId = response.data.user.id
     localStorage.setItem('userId', userId) //'userId' is like a variable, can name it with anything
@@ -129,12 +129,13 @@ searchForm.addEventListener('submit', async(event) => {
 
         const response = await axios.get(`http://localhost:3001/food/search/${searchBar}`)
         // console.log(response.data.parsed[0]) //food name
-        // console.log(response.data.parsed[0].food.label) //food name
+        console.log(response.data.parsed[0].food.label) //food name
         // console.log(response.data.parsed[0].food.nutrients.ENERC_KCAL) //Kcal
         // console.log(response.data.parsed[0].food.nutrients.FAT) //fat
         // console.log(response.data.parsed[0].food.nutrients.PROCNT) //protein
         // console.log(response.data.parsed[0].food.nutrients.CHOCDF) //carbs
         showResults(response.data)
+        saveSearch(response.data)
     } catch (error) {
         console.log(error)
     }
@@ -161,4 +162,22 @@ const showResults = (data) => {
     let resultProtein = document.querySelector('#result-protein')
     resultProtein.innerText = `Protein: ${data.parsed[0].food.nutrients.PROCNT}g`
     
+}
+
+let saveSearch = (data) => {
+let foodSearch = document.querySelector('.saveSearch')
+foodSearch.addEventListener('click', async (event) => {
+    event.preventDefault()
+    try {
+            const user = localStorage.getItem('userId')
+            const response = await axios.post(`http://localhost:3001/food/${user}/save`, {
+                name: `${data.parsed[0].food.label}`,
+                foodId: `${data.parsed[0].food.foodId}`,
+                userId: user
+            })
+            console.log(response)
+        }catch (error) {
+        console.log(error)
+    }
+    })
 }
