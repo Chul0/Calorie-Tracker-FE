@@ -129,7 +129,7 @@ searchForm.addEventListener('submit', async(event) => {
 
         const response = await axios.get(`http://localhost:3001/food/search/${searchBar}`)
         // console.log(response.data.parsed[0]) //food name
-        console.log(response.data.parsed[0].food.label) //food name
+        // console.log(response.data.parsed[0].food.label) //food name
         // console.log(response.data.parsed[0].food.nutrients.ENERC_KCAL) //Kcal
         // console.log(response.data.parsed[0].food.nutrients.FAT) //fat
         // console.log(response.data.parsed[0].food.nutrients.PROCNT) //protein
@@ -164,6 +164,7 @@ const showResults = (data) => {
     
 }
 
+//save functionality 
 let saveSearch = (data) => {
 let foodSearch = document.querySelector('.saveSearch')
 foodSearch.addEventListener('click', async (event) => {
@@ -175,9 +176,33 @@ foodSearch.addEventListener('click', async (event) => {
                 foodId: `${data.parsed[0].food.foodId}`,
                 userId: user
             })
-            console.log(response)
+            // console.log(response)
+            getAllFood()
         }catch (error) {
-        console.log(error)
+        console.log({message: `Could not save food`})
     }
     })
+}
+
+//show saved food
+const getAllFood = async () => {
+    let userId = localStorage.getItem('userId')
+    let response = await axios.get(`http://localhost:3001/users/${userId}/getfood`)
+    // console.log(response.data)
+    let data = response.data
+    let savedItemBoard = document.querySelector('.saved-item')
+  
+    while(savedItemBoard.firstChild) {
+        savedItemBoard.firstChild.remove()
+ }//if I don't add this, everytime for loop runs, it will create a duplicate
+        for (let i = 0; i < data.length; i++) {
+            let h2 = document.createElement('h2')
+            savedItemBoard.append(h2)
+             h2.innerText = `${response.data[i].name}`
+
+             let resetButton = document.createElement('button')
+             resetButton.classList.add('resetSavedItem')
+             resetButton.innerTex = 'reset'
+        }    //this will show new added food
+
 }
