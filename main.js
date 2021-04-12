@@ -13,6 +13,11 @@ const showSignUpBoard = () => {
 const showDashBoard = () => {
     showSection('.dashboard')
 }
+const showProfileBoard = () => {
+    showSection('.profile-board')
+}
+
+
 
 const loggedIn = () => {
     document.querySelector('#login-link').classList.add('hidden')
@@ -26,7 +31,8 @@ const loggedOut = () => {
     document.querySelector('#mymeal-link').classList.add('hidden') 
     document.querySelector('#profile-link').classList.add('hidden') 
     document.querySelector('.login-board').classList.add('hidden') 
-    document.querySelector('.signup-board').classList.add('hidden') 
+    document.querySelector('.signup-board').classList.add('hidden')
+    document.querySelector('.profile-board').classList.add('hidden') 
     document.querySelector('.dashboard').classList.add('hidden') //show logged out
 }
 
@@ -115,6 +121,21 @@ try {
 
 //Logout
 document.querySelector('#logout-link').addEventListener('click', () =>{
+    localStorage.removeItem('userId')
+    location.reload();
+})
+
+//Profile setting
+document.querySelector('#profile-link').addEventListener('click', (event) =>{
+    event.preventDefault()
+    showProfileBoard()
+})
+
+//Delete user account
+let deleteAccount = document.querySelector('.deleteProfile').addEventListener('click', async () => {
+    let userId = localStorage.getItem('userId')
+    const response = await axios.delete(`http://localhost:3001/users/${userId}`)
+    alert(`Good bye ${response.data.user.firstName}..`)
     localStorage.removeItem('userId')
     location.reload();
 })
