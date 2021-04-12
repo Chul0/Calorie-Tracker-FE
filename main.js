@@ -223,6 +223,7 @@ const getAllFood = async () => {
   
     while(savedItemBoard.firstChild) {
         savedItemBoard.firstChild.remove()
+        foodInfoBoard.firstChild.remove()
  }//if I don't add while loop, everytime for loop runs, it will create a duplicate
 
         for (let i = 0; i < data.length; i++) {
