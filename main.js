@@ -215,23 +215,18 @@ foodSearch.addEventListener('click', async (event) => {
 const getAllFood = async () => {
     let userId = localStorage.getItem('userId')
     let response = await axios.get(`http://localhost:3001/users/${userId}/getfood`)
-    console.log(response.data)
+    // console.log(response.data)
     let data = response.data
-
     let savedItemBoard = document.querySelector('.saved-item')
   
     while(savedItemBoard.firstChild) {
         savedItemBoard.firstChild.remove()
- }//if I don't add while loop, everytime for loop runs, it will create a duplicate
-
+ }
+ //if I don't add while loop, every time for loop runs, it will create a duplicate
         for (let i = 0; i < data.length; i++) {
             let h2 = document.createElement('h2')
-            savedItemBoard.append(h2) 
-            const foodInfo = await axios.get(`http://localhost:3001/food/search/${response.data[i].name}`) //To print out carb,fat,protein, I have to pull foodInfo(search result, because only this url has all the info)
-            foodData = foodInfo.data.parsed[0].food.nutrients
-            // console.log(foodInfo)
-
-            h2.innerText = `${response.data[i].name}: ${foodData.ENERC_KCAL} cal, carbs:${foodData.CHOCDF}g, fat:${foodData.FAT}g, protein:${foodData.PROCNT}g`//this will show new added food
+            savedItemBoard.append(h2)
+             h2.innerText = `${response.data[i].name}`//this will show new added food
             }    
             let resetButton = document.createElement('button')
             resetButton.classList.add('resetSavedItem')
@@ -257,7 +252,7 @@ document.querySelector('#profile-link').addEventListener('click', (event) =>{
 const showUserInfo = async () => {
     let userId = localStorage.getItem('userId')
     let response = await axios.get(`http://localhost:3001/users/${userId}/`)
-
+    let data = response
     // console.log(data)
 
     let firstName = document.querySelector('#edit-first-name')
