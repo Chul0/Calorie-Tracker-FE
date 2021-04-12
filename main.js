@@ -36,6 +36,10 @@ const loggedOut = () => {
     document.querySelector('.dashboard').classList.add('hidden') //show logged out
 }
 
+// const userName = (firstName) => {
+//     document.querySelector('.user-name').innerText=(`Hi ${firstName}`)
+// }
+
 
 //Changes based on login/logout statement
 if(localStorage.getItem('userId')){
@@ -117,6 +121,7 @@ try {
     alert(`Welcome back ${response.data.user.firstName} !`)
     showDashBoard()
     loggedIn()
+    
 
 } catch (error) {
     console.log(error)
@@ -131,11 +136,6 @@ document.querySelector('#logout-link').addEventListener('click', () =>{
     location.reload();
 })
 
-//Profile setting
-document.querySelector('#profile-link').addEventListener('click', (event) =>{
-    event.preventDefault()
-    showProfileBoard()
-})
 
 //Delete user account
 let deleteAccount = document.querySelector('.deleteProfile').addEventListener('click', async () => {
@@ -239,13 +239,61 @@ const getAllFood = async () => {
 
 }
 
+//Profile setting
+document.querySelector('#profile-link').addEventListener('click', (event) =>{
+    event.preventDefault()
+    showProfileBoard()
+    showUserInfo()
+    editProfile()
+})
 
+//Show userinfo
+const showUserInfo = async () => {
+    let userId = localStorage.getItem('userId')
+    let response = await axios.get(`http://localhost:3001/users/${userId}/`)
+    let data = response
+    // console.log(data)
 
+    let firstName = document.querySelector('#edit-first-name')
+        firstName.setAttribute('value', `${response.data.user.firstName}`)
+    let lastName = document.querySelector('#edit-last-name')
+        lastName.setAttribute('value', `${response.data.user.lastName}`)
+    let email = document.querySelector('#edit-email')
+        email.setAttribute('value', `${response.data.user.email}`)
+    let password = document.querySelector('#edit-password')
+        password.setAttribute('value', `${response.data.user.password}`)
+    let height = document.querySelector('#edit-height')
+        height.setAttribute('value', `${response.data.user.height}`)
+    let weight = document.querySelector('#edit-weight')
+        weight.setAttribute('value', `${response.data.user.weight}`)
 
-// let deleteAccount = document.querySelector('.deleteProfile').addEventListener('click', async () => {
-//     let userId = localStorage.getItem('userId')
-//     const response = await axios.delete(`http://localhost:3001/users/${userId}`)
-//     alert(`Good bye ${response.data.user.firstName}..`)
-//     localStorage.removeItem('userId')
-//     location.reload();
-// })
+}
+//Edit account info
+
+const editProfile = async () => {
+    document.querySelector('.user-info-form').addEventListener('submit', async (event) => {
+    event.preventDefault()
+    const firstName = document.querySelector('#edit-first-name').value
+    const lastName = document.querySelector('#edit-last-name').value
+    const email = document.querySelector('#edit-email').value
+    const password = document.querySelector('#edit-password').value
+    const height = document.querySelector('#edit-height').value
+    const weight = document.querySelector('#edit-weight').value
+    
+    try {
+        let userId = localStorage.getItem('userId')
+        let response = await axios.put(`http://localhost:3001/users/${userId}/edit`, {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            height: height,
+            weight: weight
+        })
+        // console.log(response)
+        alert('Profile info is successfully changed')
+    } catch (error) {
+        console.log(error)
+    }
+})
+}

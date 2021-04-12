@@ -18,11 +18,12 @@
                 <div class="container-right">
                     <span id="signup-link" class="nav-link">signup</span>
                     <span id="login-link" class="nav-link">login</span>
-                    <span id="logout-link" class="nav-link">logout</span>
                     <span id="dashboard-link" class="nav-link">dashboard</span>
                     <span id="profile-link" class="nav-link">profile</span>
+                    <span id="logout-link" class="nav-link">logout</span>
                 </div>
             </div>
+            <div class="user-name"></div>
         </nav>
     </header>
 
@@ -82,7 +83,6 @@
         </div>
         <div class="save-container">
             <button class="saveSearch">Save</button>
-            <button class="closeSearch">Close</button>
         </div>
 
         <div class="saved-item">
@@ -90,7 +90,20 @@
     </section>
 
     <section class="profile-board"> <!-- should be hidden -->
-        <button class="deleteProfile"> Delete account</button>
+        <form class="user-info-form">
+            <div class="user-info-input">
+                <input type="text" id="edit-first-name">
+                <input type="text" id="edit-last-name">
+                <input type="email" id="edit-email">
+                <input type="password" id="edit-password">
+                <input type="text" id="edit-height">   
+                <input type="text" id="edit-weight">           
+            </div>
+            <div class="edit-submit">
+               <input type="submit" value="Edit Profile">
+            </div> 
+        
+            <button class="deleteProfile"> Delete account</button>
     </section>
     
 

@@ -57,6 +57,24 @@
     margin: 30px auto 30px auto;
 }
 
+.profile-board {
+    border: 1px solid black;
+    width: 450px;
+    margin: auto;
+    text-align: center;
+}
+.user-info-input{
+    display:flex;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+}
+
+.edit-submit {
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
 .hidden {
     display:none;
 }
