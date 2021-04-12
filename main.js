@@ -23,12 +23,12 @@ const loggedIn = () => {
     document.querySelector('#login-link').classList.add('hidden')
     document.querySelector('#signup-link').classList.add('hidden')  //logged in 
     document.querySelector('#logout-link').classList.remove('hidden')
-    document.querySelector('#mymeal-link').classList.remove('hidden') 
+    document.querySelector('#dashboard-link').classList.remove('hidden') 
     document.querySelector('#profile-link').classList.remove('hidden') 
 }
 const loggedOut = () => {
     document.querySelector('#logout-link').classList.add('hidden')
-    document.querySelector('#mymeal-link').classList.add('hidden') 
+    document.querySelector('#dashboard-link').classList.add('hidden') 
     document.querySelector('#profile-link').classList.add('hidden') 
     document.querySelector('.login-board').classList.add('hidden') 
     document.querySelector('.signup-board').classList.add('hidden')
@@ -51,6 +51,12 @@ if(localStorage.getItem('userId')){
 document.querySelector('#home-link').addEventListener('click', () => {
     location.reload();
 })
+
+//Show dashboard when dashbord link is clicked
+document.querySelector('#dashboard-link').addEventListener('click', () => {
+    showDashBoard()
+})
+
 
 
 //signup
@@ -215,15 +221,31 @@ const getAllFood = async () => {
   
     while(savedItemBoard.firstChild) {
         savedItemBoard.firstChild.remove()
- }//if I don't add this, everytime for loop runs, it will create a duplicate
+ }//if I don't add while loop, everytime for loop runs, it will create a duplicate
         for (let i = 0; i < data.length; i++) {
             let h2 = document.createElement('h2')
             savedItemBoard.append(h2)
-             h2.innerText = `${response.data[i].name}`
-
-             let resetButton = document.createElement('button')
-             resetButton.classList.add('resetSavedItem')
-             resetButton.innerTex = 'reset'
-        }    //this will show new added food
+             h2.innerText = `${response.data[i].name}`//this will show new added food
+            }    
+            let resetButton = document.createElement('button')
+            resetButton.classList.add('resetSavedItem')
+            resetButton.innerText = 'reset'
+            resetButton.addEventListener('click', async (event)=> {
+                event.preventDefault()
+                let response = await axios.delete(`http://localhost:3001/users/${userId}/delete`) //delete saved food from user
+                location.reload();
+            })
+            savedItemBoard.append(resetButton)
 
 }
+
+
+
+
+// let deleteAccount = document.querySelector('.deleteProfile').addEventListener('click', async () => {
+//     let userId = localStorage.getItem('userId')
+//     const response = await axios.delete(`http://localhost:3001/users/${userId}`)
+//     alert(`Good bye ${response.data.user.firstName}..`)
+//     localStorage.removeItem('userId')
+//     location.reload();
+// })
