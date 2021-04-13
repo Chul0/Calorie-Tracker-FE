@@ -152,6 +152,7 @@ let searchForm = document.querySelector('#food-form')
 searchForm.addEventListener('submit', async(event) => {
     event.preventDefault()
     try {
+        let userId = localStorage.getItem('userId')
         const searchBar = document.querySelector('#food-search').value
         // console.log(searchBar)
 
@@ -164,6 +165,45 @@ searchForm.addEventListener('submit', async(event) => {
         // console.log(response.data.parsed[0].food.nutrients.CHOCDF) //carbs
         showResults(response.data)
         saveSearch(response.data)
+        let data = response.data
+        console.log(data)
+
+        let savedItemBoard = document.querySelector('.saved-item')
+        let showSave = document.createElement('button')
+        showSave.classList.add('showSave')
+        showSave.innerText = 'SHOW SAVED FOOD'
+        savedItemBoard.append(showSave)
+        showSave.addEventListener('click', async (event)=> {
+            event.preventDefault()        
+        let res = await axios.get(`http://localhost:3001/food/search/${response.data.parsed[0].food.foodId}`)
+    console.log(res)
+    
+
+
+    while(savedItemBoard.firstChild) {
+        savedItemBoard.firstChild.remove()
+ }
+ //if I don't add while loop, every time for loop runs, it will create a duplicate
+        for (let i = 0; i < data.length; i++) {
+            let img = document.createElement('img')
+            savedItemBoard.append(img)
+             img.setAttribute('src', `"${data.parsed[0].food.foodId}"`) 
+             const h4 = document.createElement('h4')
+             savedItemBoard.append(h4)
+              h4.innerText = 'hi' 
+            }    
+        })
+
+            let resetButton = document.createElement('button')
+            resetButton.classList.add('resetSavedItem')
+            resetButton.innerText = 'RESET'
+            resetButton.addEventListener('click', async (event)=> {
+                event.preventDefault()
+                let res2 = await axios.delete(`http://localhost:3001/users/${userId}/delete`) //delete saved food from user
+                location.reload();
+                console.log(res2)
+            })
+            savedItemBoard.append(resetButton)
     } catch (error) {
         console.log(error)
     }
@@ -208,41 +248,51 @@ foodSearch.addEventListener('click', async (event) => {
                 userId: user
             })
             // console.log(response)
-            getAllFood()
+            saveFood()
         }catch (error) {
         console.log({message: `Could not save food`})
     }
     })
 }
 
-//show saved food
-const getAllFood = async () => {
+const saveFood = async () => {
     let userId = localStorage.getItem('userId')
     let response = await axios.get(`http://localhost:3001/users/${userId}/getfood`)
-    // console.log(response.data)
-    let data = response.data
-    let savedItemBoard = document.querySelector('.saved-item')
-  
-    while(savedItemBoard.firstChild) {
-        savedItemBoard.firstChild.remove()
- }
- //if I don't add while loop, every time for loop runs, it will create a duplicate
-        for (let i = 0; i < data.length; i++) {
-            let h4 = document.createElement('h4')
-            savedItemBoard.append(h4)
-             h4.innerText = `- ${response.data[i].name}`//this will show new added food
-            }    
-            let resetButton = document.createElement('button')
-            resetButton.classList.add('resetSavedItem')
-            resetButton.innerText = 'RESET'
-            resetButton.addEventListener('click', async (event)=> {
-                event.preventDefault()
-                let response = await axios.delete(`http://localhost:3001/users/${userId}/delete`) //delete saved food from user
-                location.reload();
-            })
-            savedItemBoard.append(resetButton)
-
 }
+
+//show saved food
+// const getAllFood = async (data) => {
+//     let userId = localStorage.getItem('userId')
+//     let response = await axios.get(`http://localhost:3001/food/search/${data.parsed[0].food.foodId}`)
+//     // console.log(response.data)
+    
+
+//     let savedItemBoard = document.querySelector('.saved-item')
+  
+//     while(savedItemBoard.firstChild) {
+//         savedItemBoard.firstChild.remove()
+//  }
+//  //if I don't add while loop, every time for loop runs, it will create a duplicate
+//         for (let i = 0; i < data.length; i++) {
+//             // let img = document.createElement('img')
+//             // savedItemBoard.append(img)
+//             //  img.setAttribute('src', `"${data.parsed[0].food.foodId}"`) 
+//              let h4 = document.createElement('h4')
+//              savedItemBoard.append(h4)
+//               h4.innerText = 'hi' 
+
+//             }    
+//             let resetButton = document.createElement('button')
+//             resetButton.classList.add('resetSavedItem')
+//             resetButton.innerText = 'RESET'
+//             resetButton.addEventListener('click', async (event)=> {
+//                 event.preventDefault()
+//                 let response = await axios.delete(`http://localhost:3001/users/${userId}/delete`) //delete saved food from user
+//                 location.reload();
+//             })
+//             savedItemBoard.append(resetButton)
+// }
+
 
 //Profile setting
 document.querySelector('#profile-link').addEventListener('click', (event) =>{
