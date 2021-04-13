@@ -92,6 +92,7 @@ document.querySelector('.signup-form').addEventListener('submit', async (event) 
             const userId = response.data.user.id
             localStorage.setItem('userId', userId)
             showLoginBoard()
+            alert('Successfully signed up!')
         }
     } catch (error) {
         // console.log(error)
