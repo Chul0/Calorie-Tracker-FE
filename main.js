@@ -83,7 +83,7 @@ document.querySelector('.signup-form').addEventListener('submit', async (event) 
             height: height,
             weight: weight
         })
-        console.log(response)
+        // console.log(response)
         
         const errorMessage = response.data.error
         if(errorMessage != null){
@@ -174,7 +174,10 @@ const showResults = (data) => {
     // resultsId = data.parsed[0].food.foodId
     let searchResults = document.querySelector('.search-result-container')
     searchResults.classList.remove('hidden')
+    let saveButton = document.querySelector('.saveSearch')
+    saveButton.classList.remove('hidden')
     
+
     let resultFoodName = document.querySelector('#result-food-name')
     resultFoodName.innerText = data.parsed[0].food.label
     
@@ -225,13 +228,13 @@ const getAllFood = async () => {
  }
  //if I don't add while loop, every time for loop runs, it will create a duplicate
         for (let i = 0; i < data.length; i++) {
-            let h2 = document.createElement('h2')
-            savedItemBoard.append(h2)
-             h2.innerText = `${response.data[i].name}`//this will show new added food
+            let h4 = document.createElement('h4')
+            savedItemBoard.append(h4)
+             h4.innerText = `- ${response.data[i].name}`//this will show new added food
             }    
             let resetButton = document.createElement('button')
             resetButton.classList.add('resetSavedItem')
-            resetButton.innerText = 'reset'
+            resetButton.innerText = 'RESET'
             resetButton.addEventListener('click', async (event)=> {
                 event.preventDefault()
                 let response = await axios.delete(`http://localhost:3001/users/${userId}/delete`) //delete saved food from user

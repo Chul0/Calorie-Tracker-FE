@@ -12,15 +12,16 @@
         <nav> 
             <div class="container">
                 <div class="container-left">
-                    <span id="home-link" class="nav-link"><img id="home-image" src="./img/home.png"></span>
+                    <span id="home-link" class="nav-link">
+                        <img src="https://i.ibb.co/q77yT0Z/Home.png"></span>
                     <!-- </span>this name to be changed 'Calorie Tracker' -->
                 </div>
                 <div class="container-right">
-                    <span id="signup-link" class="nav-link">signup</span>
-                    <span id="login-link" class="nav-link">login</span>
-                    <span id="dashboard-link" class="nav-link">dashboard</span>
-                    <span id="profile-link" class="nav-link">profile</span>
-                    <span id="logout-link" class="nav-link">logout</span>
+                    <span id="signup-link" class="nav-link"><img src="https://i.ibb.co/jHyBxJd/signup.png"></span>
+                    <span id="login-link" class="nav-link"><img src="https://i.ibb.co/kD72ZSL/login.png"></span>
+                    <span id="dashboard-link" class="nav-link"><img src="https://i.ibb.co/jWLkXhB/dashboard.png"></span>
+                    <span id="profile-link" class="nav-link"><img src="https://i.ibb.co/qsh0R8c/profile.png"></span>
+                    <span id="logout-link" class="nav-link"><img src="https://i.ibb.co/bvxkLGP/logout.png"></span>
                 </div>
             </div>
             <div class="user-name"></div>
@@ -30,18 +31,16 @@
     <section class="signup-board"> <!-- should be hidden -->
         <form class="signup-form">
             <div class="signup-input">
+             <div class="signup-top"><h1>SIGNUP</h1></div>   
              <input type="text" placeholder="First name" id="signup-first-name">
              <input type="text" placeholder="Last name" id="signup-last-name">
              <input type="email" placeholder="Email Address" id="signup-email">
              <input type="password" placeholder="Password" id="signup-password">
              <input type="text" placeholder="Height" id="signup-height">   
              <input type="text" placeholder="Weight" id="signup-weight">    
-             <span id="signup-sex">
-                <label for="signup-sex">SEX</label> <label for="signup-sex">Male</label><input type="checkbox" id="signup-male"> <label for="signup-sex">Female</label><input type="checkbox" id="signup-female">
-            </span>       
             </div>
           <div class="signup-submit">
-            <input type="submit" value="sign-up">
+            <input type="submit" value="SIGNUP">
           </div>  
         </form>
     </section>
@@ -49,17 +48,18 @@
     <section class="login-board"> <!-- should be hidden -->
         <form id="login-form">
             <div class="login-input">
+                <div class="signup-top"><h1>LOGIN</h1></div> 
              <input type="text" placeholder="Email Address" id="login-email">
              <input type="password" placeholder="Password" id="login-password">     
             </div>
 
             <div class="login-submit">
               <div class="login-button"> 
-                  <input type="submit" value="login">
+                  <input type="submit" value="LOGIN">
               </div>
               <div class="signup-button">
                  <label for="login-password">Not a member yet?</label>
-                 <input type="submit" value="sign-up">
+                 <input type="submit" value="SINGUP">
               </div>  
             </div>  
         </form>
@@ -68,28 +68,36 @@
     <section class="dashboard"> <!-- should be hidden -->
         <div class="search-bar-container">
             <form id="food-form">
+                <h2>SEARCH FOOD</h2>
                 <input type="text" id="food-search" placeholder="example:apple">
-                <input type="submit" value="search">
+                <input id="food-searchButton" type="submit" value="SEARCH">
             </form>
+            <div class="searchbar-bottom">
+            <h2 id="food-info">FOOD INFO</h2>
+            <h2>SAVED FOOD</h2>
+           </div>
         </div>
         
         <div class="search-result-container hidden">
-            <h2 id="result-food-name"></h2>
-            <h2 id="result-kcal"></h2>
-            <h2 id="result-carbs"></h2>
-            <h2 id="result-fat"></h2>
-            <h2 id="result-protein"></h2>
-
+            <div class="search-result">
+            <h4 id="result-food-name"></h4>
+            <h4 id="result-kcal"></h4>
+            <h4 id="result-carbs"></h4>
+            <h4 id="result-fat"></h4>
+            <h4 id="result-protein"></h4>
+            <button class="saveSearch hidden">SAVE</button>
+        </div>
+            
+            <div class="saved-item">
+            </div>
         </div>
         <div class="save-container">
-            <button class="saveSearch">Save</button>
         </div>
 
-        <div class="saved-item">
-        </div>
     </section>
 
     <section class="profile-board"> <!-- should be hidden -->
+        <div class="signup-top"><h1>PROFILE</h1></div> 
         <form class="user-info-form">
             <div class="user-info-input">
                 <input type="text" id="edit-first-name">
@@ -101,9 +109,9 @@
             </div>
             <div class="edit-submit">
                <input type="submit" value="Edit Profile">
+               <button class="deleteProfile"> Delete account</button>
             </div> 
         
-            <button class="deleteProfile"> Delete account</button>
     </section>
     
 
